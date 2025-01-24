@@ -1,10 +1,19 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+
+const createTask = async (req, res) => {
+  const { title, userId, categoryId } = req.body;
+  const task = await prisma.task.create({
+    data: { title, userId, categoryId },
+  });
+  res.json(task);
+};
+
 const prisma = require('../utils/PrismaClients');
 async function addTask(req, res){
     try{
-        const data = req.body;
+        const { title, userId, categoryId } = req.body;
         const task = await prisma.task.create({data})
         res.status(200).json({message:"task added succesfully"})
     }catch(error){
