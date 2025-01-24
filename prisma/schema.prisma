@@ -15,8 +15,8 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  deletedAt DateTime? // Nullable field for soft delete
-  tasks     Task[]    // One-to-many relationship with Task
+  deletedAt DateTime? 
+  tasks     Task[]   
 }
 
 enum TaskStatus {
@@ -32,10 +32,10 @@ model Task {
   description String?
   status      TaskStatus
   dueDate     DateTime?
-  userId      String   // Change to String to match User id type
-  user        User     @relation(fields: [userId], references: [id]) // Establish relationship
-  categoryId  Int?     // Optional relationship to Category
-  category    Category? @relation(fields: [categoryId], references: [id]) // Establish relationship
+  userId      String   
+  user        User     @relation(fields: [userId], references: [id]) 
+  categoryId  Int?     
+  category    Category? @relation(fields: [categoryId], references: [id]) 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -43,7 +43,7 @@ model Task {
 model Category {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  tasks     Task[]   // One-to-many relationship with Task
+  tasks     Task[]   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
